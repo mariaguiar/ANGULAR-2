@@ -1,0 +1,132 @@
+
+<head>
+
+</head>
+
+<body>
+
+    <h2>*ngFor: tabla</h2>
+    <table class="">
+       <thead>
+           <th>Nombre</th>
+           <th>Pais</th>
+           <th>Codigo</th>
+       </thead>
+
+       <tbody>
+           <tr *ngFor= "let ciudad of misCiudades">
+               <td>{{ ciudad.nombre }}</td>
+               <td>{{ ciudad.pais }}</td>
+               <td>{{ ciudad.codigo }}</td>
+
+           </tr>
+
+       </tbody>
+        
+    </table>
+    
+    <h2>*ngIf: ¿Hay ciudades?</h2>
+
+    <div *ngIf= "misCiudades.length ===0">
+        No hay ciudades
+    </div>
+    <div *ngIf= "misCiudades.length > 0">
+        Hay ciudades
+    </div>
+      
+    
+    <h2>*ngClass: Resaltar fila par</h2>
+    
+    <table class="">
+        <thead>
+            <th>Nombre</th>
+            <th>Pais</th>
+            <th>Codigo</th>
+        </thead>
+ 
+        <tbody>
+            <tr *ngFor= "let ciudad of misCiudades; let par = even" [ngClass]= "{resaltar:par}">
+                <td>{{ ciudad.nombre }}</td>
+                <td>{{ ciudad.pais }}</td>
+                <td>{{ ciudad.codigo }}</td>
+ 
+            </tr>
+ 
+        </tbody>
+         
+    </table>
+     
+
+    <h2>Formulario:</h2>
+    <p>Esta comentado por interfenrencias con otros ejercicios<p>
+
+
+       <form> 
+        
+           <p>Nombre ciudad: <input type="text" #nombre></p>
+           <p>Pais: <input type="text" #pais></p>
+           <p>Codigo: <input type="text" #codigo></p>
+           
+           <button type= "button" (click)="anyadirCiudad(nombre, pais, codigo)">Enviar</button>
+      </form> 
+     
+    
+    <h2>Tabla mostrar clima</h2>
+
+    <table class="">
+        <thead>
+            <th>Indice</th>
+            <th>Nombre</th>
+            <th>Pais</th>
+            <th>Codigo</th>
+        </thead>
+ 
+        <tbody>
+            <tr *ngFor= "let ciudad of misCiudades; let indice = index">
+                <td >{{ indice + 1 }} </td>
+                <td (click)="mostrarClima(indice)">{{ ciudad.nombre }}</td>
+                <td>{{ ciudad.pais }}</td>
+                <td>{{ ciudad.codigo }}</td>
+ 
+            </tr>
+ 
+        </tbody>
+         
+    </table>
+
+     <div *ngIf = "indice >= 0">
+
+         {{misCiudades[indice].nombre}}
+         {{misCiudades[indice].pais}}
+         {{misCiudades[indice].codigo}}
+         {{misCiudades[indice].clima.precipitaciones}}
+         {{misCiudades[indice].clima.temperatura.valor}}
+         {{misCiudades[indice].clima.temperatura.unidad}}
+         {{misCiudades[indice].clima.viento}}
+
+
+     </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <h2>Pipe % precipitaciones:</h2>
+
+    <p>{{misCiudades[0].clima.precipitaciones | porcentaje}}</p>
+
+    
+    <h2>Pipe grados:</h2>
+
+    <p>{{misCiudades[0].clima.temperatura | grados}}</p>
+
+
+</body>
